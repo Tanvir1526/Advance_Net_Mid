@@ -1,0 +1,27 @@
+﻿@model Lab_Product.Models.Student
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+<h2>Create</h2>
+@if (Model != null)
+{
+    <h4>Name : @Model.Name</h4>
+    <h4>Id: @Model.Id</h4>
+    <h4>Dob : @Model.Dob</h4>
+    <h4>Email : @Model.Email</h4>
+
+
+}
+<form method="post" action="/student/create">
+    <input type="text" placeholder="Name" name="Name" value="@Model.Name" class="form-control" />
+    @Html.ValidationMessageFor(Model => Model.Name, "", new { @class = "text-danger" })
+    <input type="text" placeholder="Id" name="Id" value="@Model.Id" class="form-control" />
+    @Html.ValidationMessageFor(Model => Model.Id, "", new { @class = "text-danger" })
+    <input type="text" placeholder="Date of birth" name="Dob" value="@Model.Dob" class="form-control" />
+    @Html.ValidationMessageFor(Model => Model.Dob, "", new { @class = "text-danger" })
+    <input type="text" placeholder="Email" name="Email" value="@Model.Email" class="form-control" />
+    @Html.ValidationMessageFor(Model => Model.Email, "", new { @class = "text-danger" })
+    <input type="submit" name="btnSubmint" value="Submit" />
+</form>
