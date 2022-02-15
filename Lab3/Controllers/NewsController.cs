@@ -27,19 +27,54 @@ namespace Lab3.Controllers
         {
            if(ModelState .IsValid)
             {
+                Entities1 db = new Entities1();
+                db.Books.Add(b);
+                db.SaveChanges();
                 return RedirectToAction("Index"); 
             }
             return View(b);
         }
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            Entities1 db = new Entities1();
+            var news = (from n in db.Books
+                        where n.Id == id select n).FirstOrDefault();
+            return View(news);
+        }
+        [HttpPost]
+        public ActionResult Edit(Book sub_b)
+        {
+            Entities1 db = new Entities1();
+            var data = (from s in db.Books
+                        where s.Id == sub_b.Id
+                        select s).FirstOrDefault();
+            db.Entry(data).CurrentValues.SetValues(sub_b);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            Entities1 db = new Entities1();
+            var data = (from s in db.Books
+                        where s.Id == id
+                        select s).FirstOrDefault();
 
-        public ActionResult Edit()
-        {
-            return View();
+            return View(data);
         }
-        public ActionResult Delete()
+        [HttpPost]
+        public ActionResult Delete(Book sub_b)
         {
-            return View();
+            Entities1 db = new Entities1();
+            var data = (from s in db.Books
+                        where s.Id == sub_b.Id
+                        select s).FirstOrDefault();
+
+            db.Books.Remove(data);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
-        
+
     }
 }

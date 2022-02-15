@@ -5,25 +5,32 @@
 
 <h2>Index</h2>
 
-<table class="tabel table-bordered ">
+ <a class="btn btn-success" href="/News/Create">Create</a>
+<table class="table table-bordered ">
+    
     <tr>
-        <th>Id</th>
+
         <th>Title</th>
         <th>Description</th>
         <th>Category</th>
         <th>Publish Date</th>
+        <th>Action</th>
     </tr>
-    
-    @foreach(var b in Model)
-        {
+
+    @foreach (var b in Model)
+    {
         <tr>
-            <td>b.Id</td>
-            <td>b.Title</td>
-            <td>b.Description</td>
-            <td>b.Category</td>
-            <td>b.PublishDate</td>
+
+            <td>@b.Title</td>
+            <td>@b.Description</td>
+            <td>@b.Category</td>
+            <td>@b.PublishDate</td>
+            <td>
+                <a class="btn btn-primary" href=/News/Edit/@b.Id>Edit</a>
+                <a class="btn btn-danger" href="/News/Delete/@b.Id">Delete</a>
+            </td>
         </tr>
 
-        }
-    
+    }
+
 </table>
